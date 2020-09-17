@@ -19,8 +19,6 @@ import pandas_datareader.data as web
 
 
 # Create your views here.
-def get(self):
-    return 0
 
 def getExchangeRate(url):
     html = urlopen(url).read()
@@ -56,8 +54,6 @@ def getMarketStartEndTime(self):
     return JsonResponse(jsonfile)
 
 def getMonthChart(self):
-    sd = datetime(2015, 1, 1)
-    ed = datetime.now()
 
 
     date = datetime.date(datetime.now())

@@ -6,6 +6,5 @@ urlpatterns = [
     path('getUSexchangeRate', views.getUSexchangeRate, name='getUSexchangeRate'),
     path('getEUexchangeRate', views.getEUexchangeRate, name='getEUexchangeRate'),
     path('getMonthChart', views.getMonthChart, name="getMonthChart"),
-    path('getMarketStartEndTime', views.getMarketStartEndTime, name="getMarketStartEndTime"),
-    path('', views.get, name='getKrxAPI')
+    path('getMarketStartEndTime', views.getMarketStartEndTime, name="getMarketStartEndTime")
 ]
