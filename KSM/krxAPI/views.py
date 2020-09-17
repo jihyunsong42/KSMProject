@@ -8,8 +8,15 @@ import requests
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import string
+from . import models
 
 from urllib.request import urlopen
+import urllib.parse as urlparse
+
+import pandas_datareader.data as web
+
+
+
 
 # Create your views here.
 def get(self):
@@ -18,7 +25,6 @@ def get(self):
 def getExchangeRate(url):
     html = urlopen(url).read()
     data = json.loads(html)
-    print(data)
     return data
 
 def getUSexchangeRate(self):
@@ -45,8 +51,24 @@ def getInterestRate(self):
     data = json.loads(html)
     return JsonResponse(data)
 
+def getMarketStartEndTime(self):
+    jsonfile = models.marketStartEndTime()
+    return JsonResponse(jsonfile)
+
 def getMonthChart(self):
-    stock_month = stock.get_market_ohlcv_by_date('19700101', '20200914', '000660')
+    sd = datetime(2015, 1, 1)
+    ed = datetime.now()
+
+
+    date = datetime.date(datetime.now())
+    date10yago = datetime.date(datetime.now() - relativedelta(years=10))
+    today = date.strftime("%Y%m%d")
+    today_10yago = date10yago.strftime("%Y%m%d")
+    
+    
+    stock_month = stock.get_index_ohlcv_by_date(today_10yago, today, '코스피')
+    print(stock.get_index_price_change_by_name(today_10yago, today))
+    
     stock_month.columns = ["StartPrice", "HighPrice", "LowPrice", "EndPrice", "Volume"]
 
     records = json.loads(stock_month.to_json())
