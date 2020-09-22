@@ -1,0 +1,13 @@
+.index {
+    padding: 1em;
+    background-color: #e2e2e2;
+    background-clip: content-box;
+    color: white;
+    height: 6.25em;
+}
+
+.list-group-item {
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
+}

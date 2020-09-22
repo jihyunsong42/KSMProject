@@ -1,0 +1,77 @@
+<div style="height:2em; line-height:2em; color:lightgray; background-color: black; text-align: center;">
+    Market opens in xx hours xx minutes.
+</div>
+<nav style="padding-left: 2em; padding-right: 2em;">
+    <div class="row">
+        <div class="col-lg-3 mp-3">
+            <div class="card" style="background-color:lightgrey; opacity: 0.5">
+                <div class="card-body">
+                    Bank of Korea Base Rate <span style="font-weight: bold; color: black">{{interest}}%</span><br>
+                    {{exchangeRate_US}}<br>
+                    {{exchangeRate_EU}}
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-lg-6 mp-3" style="text-align: center">
+            <h2>
+                Korea Stock Market
+            </h2>
+            <p>
+                {{today}}
+            </p>
+        </div>
+        <div class="col-lg-2 mp-3" style="background-color: #e2e2e2; color: #000000">
+            <p>
+                Ad
+            </p>
+        </div>
+        <div class="col-lg-1 mp-3">
+            <button class="form-control btn btn-outline-success" style="width: 100%; height: 50%">Sign in <i class="fa fa-sign-in"></i></button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" style="width:100%">
+                    Menu
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-8">
+            <div class="badge text-wrap" style="background-color: #eee6c4; width: 100%; opacity: 0.5; padding: 1em">
+                <marquee scrollamount="3" style="height:100%">
+                    <div *ngFor="let dollar of dollars; let i = index" style="display:inline-block">
+                        <i class="fa fa-line-chart"></i>
+                        {{stocks[i]}}
+                        <i *ngIf="dollar >= 0" class="fa fa-angle-double-up" style="color: red"></i>
+                        <i *ngIf="dollar < 0" class="fa fa-angle-double-down" style="color: blue"></i>
+                        
+                        <span>&nbsp;</span>
+                        <span [style.color]="(dollar >= 0) ? 'red' : 'blue'">{{dollar}}
+                            {{percentage[i]}}</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </div>
+                </marquee>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search" />
+                <div class="input-group-append" style="cursor: pointer;">
+                    <span class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i>
+                    </span>
+                  </div>
+            </div>
+            
+        </div>
+    </div>
+</nav>

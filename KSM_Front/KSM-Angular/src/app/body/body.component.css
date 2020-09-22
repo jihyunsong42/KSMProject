@@ -1,0 +1,17 @@
+.row {
+    margin: 1em;
+}
+
+.card {
+    background-color:lightgrey;
+    opacity: 0.5;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.body-left {
+    background-color: #e2e2e2;
+    color: 000000;
+    margin-top:2em;
+    margin-bottom:2em;
+}
