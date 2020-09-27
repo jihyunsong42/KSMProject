@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework'
+    'rest_framework',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -49,7 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'KSM.urls'
@@ -132,8 +133,9 @@ REST_FRAMEWORK = {
     ]
 }
 
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:4200', # Allowed host, if CORS_ORIGIN_ALLOW_ALL is False
-)
+# CORS_ORIGIN_WHITELIST = (
+#     # 'http://localhost:4200', # Allowed host, if CORS_ORIGIN_ALLOW_ALL is False
+#     'https://ksm-front-azure.azurewebsites.net/' # Production Mode
+# )

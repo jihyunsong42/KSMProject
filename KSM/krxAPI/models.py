@@ -13,8 +13,7 @@ now = datetime.now()
 PARAMS_URL = urlparse.urlencode({'solYear':now.year, 'solMonth':now.strftime("%m")}) # year and month parameter
 # Create your models here.
 def marketStartEndTime():
-    nextday = now + timedelta(days = 1)
-    print(nextday)
+    # nextday = now + timedelta(days = 1)
 
     request_query = HOLIDAY_URL + '/' + HOLIDAY_OP + '?' + PARAMS_URL + '&' + 'serviceKey' + '=' + HOLIDAY_KEY
     
@@ -23,6 +22,4 @@ def marketStartEndTime():
     data_dict = xmltodict.parse(xmlfile.read())
     xmlfile.close()
     jsonfile = json.loads(json.dumps(data_dict, indent=2))
-
-    print(jsonfile)
     return jsonfile

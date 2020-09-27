@@ -27,7 +27,6 @@ export class HeaderComponent implements OnInit {
     date.setMinutes(date.getMinutes() + 30);
     console.log(date);
 
-    this.http.getMarketStartEndTime().subscribe(res => console.log(res));
     this.http.getInterestRate().subscribe(res => {
       var records: any[] = res.StatisticSearch.row;
       this.interest = records[records.length - 1].DATA_VALUE;

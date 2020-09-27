@@ -1,2 +1,5 @@
 django==3.1.1
 djangorestframework==3.11.0
+django-cors-headers
+pykrx
+xmltodict

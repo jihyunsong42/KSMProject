@@ -9,12 +9,9 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import string
 from . import models
-
 from urllib.request import urlopen
 import urllib.parse as urlparse
-
-import pandas_datareader.data as web
-
+from collections import OrderedDict
 
 
 
@@ -53,17 +50,106 @@ def getMarketStartEndTime(self):
     jsonfile = models.marketStartEndTime()
     return JsonResponse(jsonfile)
 
-def getMonthChart(self):
-
-
+def getDayIndex(self):
     date = datetime.date(datetime.now())
-    date10yago = datetime.date(datetime.now() - relativedelta(years=10))
+    date1wago = datetime.date(datetime.now() - relativedelta(weeks=2))
     today = date.strftime("%Y%m%d")
-    today_10yago = date10yago.strftime("%Y%m%d")
+    today1wago = date1wago.strftime("%Y%m%d")
+    kospi = stock.get_index_ohlcv_by_date(today1wago, today, '코스피')
+    kosdaq = stock.get_index_ohlcv_by_date(today1wago, today, '코스닥')
+    kospi200 = stock.get_index_ohlcv_by_date(today1wago, today, '코스피 200')
+
+    kospi = kospi.tail(2)
+    kosdaq = kosdaq.tail(2)
+    kospi200 = kospi200.tail(2)
+    
+    # kospi
+    kospi_prev = kospi["종가"][0]
+    kospi_curr = kospi["종가"][1]
+
+    kospi_diff = kospi_curr - kospi_prev
+    kospi_diff = round(kospi_diff, 2)
+    kospi_flucRate = ((kospi_curr - kospi_prev) / kospi_prev) * 100
+    kospi_flucRate = round(kospi_flucRate, 2)
+
+    # kosdaq
+    kosdaq_prev = kosdaq["종가"][0]
+    kosdaq_curr = kosdaq["종가"][1]
+    print(kosdaq_prev)
+    print(kosdaq_curr)
+    kosdaq_diff = kosdaq_curr - kosdaq_prev
+    kosdaq_diff = round(kosdaq_diff, 2)
+    kosdaq_flucRate = ((kosdaq_curr - kosdaq_prev) / kosdaq_prev) * 100
+    kosdaq_flucRate = round(kosdaq_flucRate, 2)
+
+    # kospi 200
+    kospi200_prev = kospi200["종가"][0]
+    kospi200_curr = kospi200["종가"][1]
+
+    kospi200_diff = kospi200_curr - kospi200_prev
+    kospi200_diff = round(kospi200_diff, 2)
+    kospi200_flucRate = ((kospi200_curr - kospi200_prev) / kospi200_prev) * 100
+    kospi200_flucRate = round(kospi200_flucRate, 2)
+
+    print(str(kospi_diff) + ", " + str(kospi_flucRate))
+    print(str(kosdaq_diff) + ", " + str(kosdaq_flucRate))
+    print(str(kospi200_diff) + ", " + str(kospi200_flucRate))
+
+    json_file = OrderedDict()
+    json_file["KOSPI"] = {'CurrentPrice': kospi_curr, 'FluctuatedAmount': kospi_diff, 'FluctuatedRate': kospi_flucRate}
+    json_file["KOSDAQ"] = {'CurrentPrice': kosdaq_curr, 'FluctuatedAmount': kosdaq_diff, 'FluctuatedRate': kosdaq_flucRate}
+    json_file["KOSPI200"] = {'CurrentPrice': kospi200_curr, 'FluctuatedAmount': kospi200_diff, 'FluctuatedRate': kospi200_flucRate}
+    js = json.dumps(json_file)
+    print(js)
+    return JsonResponse(js, safe=False)
+
+
+    # kospi.loc["날짜"]
+
+def getKospiChart(self):
+    date = datetime.date(datetime.now())
+    date1yago = datetime.date(datetime.now() - relativedelta(years=1))
+    
+    date1dago = datetime.date(datetime.now() - relativedelta(days=2))
+
+    today = date.strftime("%Y%m%d")
+    today_1yago = date1yago.strftime("%Y%m%d")
+    today_1dago = date1dago.strftime("%Y%m%d")
+
     
     
-    stock_month = stock.get_index_ohlcv_by_date(today_10yago, today, '코스피')
-    print(stock.get_index_price_change_by_name(today_10yago, today))
+
+    st = stock.get_index_price_change_by_name(today_1dago, today)
+    print(st.head(2))
+
+    stock_month = stock.get_index_ohlcv_by_date(today_1yago, today, '코스피')
+    print(stock_month)
+    stock_month.columns = ["StartPrice", "HighPrice", "LowPrice", "EndPrice", "Volume"]
+
+    records = json.loads(stock_month.to_json())
+    return JsonResponse(records)
+
+def getKosdaqChart(self):
+    date = datetime.date(datetime.now())
+    date1yago = datetime.date(datetime.now() - relativedelta(years=1))
+    today = date.strftime("%Y%m%d")
+    today_1yago = date1yago.strftime("%Y%m%d")
+    
+    stock_month = stock.get_index_ohlcv_by_date(today_1yago, today, '코스닥')
+    
+    stock_month.columns = ["StartPrice", "HighPrice", "LowPrice", "EndPrice", "Volume"]
+
+    records = json.loads(stock_month.to_json())
+    return JsonResponse(records)
+
+
+def getKospi200Chart(self):
+    date = datetime.date(datetime.now())
+    date1yago = datetime.date(datetime.now() - relativedelta(years=1))
+    today = date.strftime("%Y%m%d")
+    today_1yago = date1yago.strftime("%Y%m%d")
+    
+    stock_month = stock.get_index_ohlcv_by_date(today_1yago, today, '코스피 200')
     
     stock_month.columns = ["StartPrice", "HighPrice", "LowPrice", "EndPrice", "Volume"]
 
