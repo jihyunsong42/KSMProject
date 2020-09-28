@@ -210,7 +210,6 @@ export class ChartComponent implements OnInit {
 
   async ngOnInit() {
     await this.http.getKospiChart().toPromise().then((res: MonthChart) => {
-      console.log(res);
       this.stockName = "KOSPI";
       this.monthChart = res;
       var endPrice = this.monthChart.EndPrice;
@@ -231,7 +230,6 @@ export class ChartComponent implements OnInit {
         if (number == 0) { // KOSPI 
           await this.http.getKospiChart().toPromise().then(res => {
             this.monthChart = res;
-            console.log(this.monthChart);
             var endPrice = this.monthChart.EndPrice;
             Object.keys(endPrice).forEach((res) => {
               var dataSet: number[] = [parseInt(res), endPrice[res]];
@@ -246,7 +244,6 @@ export class ChartComponent implements OnInit {
 
           await this.http.getKosdaqChart().toPromise().then(res => {
             this.monthChart = res;
-            console.log(this.monthChart);
             var endPrice = this.monthChart.EndPrice;
             Object.keys(endPrice).forEach((res) => {
               var dataSet: number[] = [parseInt(res), endPrice[res]];
@@ -267,9 +264,6 @@ export class ChartComponent implements OnInit {
           });
           this.chartAvailable = 2;
           Highcharts.stockChart('KOSPI200container', this.kospi200Options);
-        }
-        else {
-          console.log("Initial number value : 3")
         }
       }
     });

@@ -31,5 +31,6 @@
         "venv.bak{,/**}",
         ".vscode{,/**}",
         "node_modules{,/**}"
-    ]
+    ],
+    "appService.showBuildDuringDeployPrompt": false
 }

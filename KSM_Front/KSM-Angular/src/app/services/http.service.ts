@@ -9,8 +9,8 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
   
-  private url: string = "http://localhost:8000/";
-  // private url: string = "https://ksm-azure.azurewebsites.net/"; // Production Mode
+  // private url: string = "http://localhost:8000/";
+  private url: string = "https://ksm-azure.azurewebsites.net/"; // Production Mode
   private headers = new HttpHeaders({ 'Access-Control-Allow-Origin': '*' });
   private options = { headers: this.headers };
   

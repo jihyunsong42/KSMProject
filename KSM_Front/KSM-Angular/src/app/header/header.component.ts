@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
     var date = new Date();
     date.setHours(date.getHours() + 11);
     date.setMinutes(date.getMinutes() + 30);
-    console.log(date);
 
     this.http.getInterestRate().subscribe(res => {
       var records: any[] = res.StatisticSearch.row;
@@ -34,15 +33,11 @@ export class HeaderComponent implements OnInit {
     this.http.getUSexchangeRate().subscribe(res => {
       var rate: number = res.rates.KRW;
       this.exchangeRate_US = rate.toFixed(2) + " / USD";
-      console.log(this.exchangeRate_US);
     });
     this.http.getEUexchangeRate().subscribe(res => {
       var rate: number = res.rates.KRW;
       this.exchangeRate_EU = rate.toFixed(2) + " / EUR";
-      console.log(this.exchangeRate_EU);
-    })
-    this.today = new Date().getFullYear().toString() + "." + new Date().getMonth().toString() + "." + new Date().getDate().toString() + " " + this.day[new Date().getDay()];
-    
+    });
+    this.today = new Date().getFullYear().toString() + "." + (new Date().getMonth() + 1) + "." + new Date().getDate().toString() + " " + this.day[new Date().getDay()];
   }
-
 }

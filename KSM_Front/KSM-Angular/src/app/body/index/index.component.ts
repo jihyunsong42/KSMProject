@@ -24,8 +24,6 @@ export class IndexComponent implements OnInit {
       this.kosdaq = index.KOSDAQ;
       this.kospi200 = index.KOSPI200;
     });
-
-    console.log(this.kospi);
   }
 
   click_KOSPI() {

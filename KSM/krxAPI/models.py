@@ -4,22 +4,22 @@ import urllib.parse as urlparse
 from urllib.request import urlopen
 import xmltodict
 import json
+from pykrx import stock
+from dateutil.relativedelta import relativedelta
 
-
-HOLIDAY_URL = "http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService"
-HOLIDAY_OP = "getHoliDeInfo"
-HOLIDAY_KEY = "zNmGaQBxA1xPc3hd0p10ojmpRb%2FOfm44F%2FLmkGVSotjCn4I8NixNLbTO%2BwOtYE30CHoqd0WUDZb62Ut%2F2ffOLw%3D%3D"
-now = datetime.now()
-PARAMS_URL = urlparse.urlencode({'solYear':now.year, 'solMonth':now.strftime("%m")}) # year and month parameter
 # Create your models here.
 def marketStartEndTime():
-    # nextday = now + timedelta(days = 1)
-
-    request_query = HOLIDAY_URL + '/' + HOLIDAY_OP + '?' + PARAMS_URL + '&' + 'serviceKey' + '=' + HOLIDAY_KEY
-    
-    xmlfile = urlopen(request_query)
-    # readxml = xmlfile.read()
-    data_dict = xmltodict.parse(xmlfile.read())
-    xmlfile.close()
-    jsonfile = json.loads(json.dumps(data_dict, indent=2))
-    return jsonfile
+    now = datetime.now()
+    # now = datetime.date(datetime.utcnow() + relativedelta(months=1))
+    print(now)
+    print(now.year)
+    print(now.month)
+    days = stock.get_business_days(now.year, now.month)
+    print(days)
+    day = None
+    for d in days:
+        if (d > now):
+            day = d
+            break
+    print(day)
+    return days

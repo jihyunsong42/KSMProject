@@ -1,9 +1,15 @@
+<div class="alert alert-primary" *ngIf="!indexAvailable" role="alert">
+  Loading the data. Please wait...
+</div>
 <div class="list-group list-group-horizontal-lg" *ngIf="indexAvailable">
     <a id="kospi" (click)="click_KOSPI()" class="list-group-item list-group-item-info list-group-item-action" [ngClass]="(stockNumber == 0) ? 'active' : ''">
         <div>
           <h4>KOSPI</h4>
           <h2>{{kospi.CurrentPrice}} KRW</h2>
-          <p><span [style.color]="(kospi.CurrentPrice >= 0) ? 'red' : 'blue'">{{kospi.FluctuatedAmount >= 0 ? "+" : "-"}}{{kospi.FluctuatedAmount}}
+          <p><span [style.color]="(kospi.FluctuatedAmount >= 0) ? 'red' : 'blue'">
+            <i *ngIf="kospi.FluctuatedAmount >= 0" class="fa fa-angle-double-up"></i>
+            <i *ngIf="kospi.FluctuatedAmount < 0" class="fa fa-angle-double-down"></i>
+            {{kospi.FluctuatedAmount >= 0 ? "+" : "-"}}{{kospi.FluctuatedAmount}}
             {{kospi.FluctuatedRate}}%</span></p>
         </div>
       </a>
@@ -11,15 +17,21 @@
       <div>
         <h4>KOSDAQ</h4>
         <h2>{{kosdaq.CurrentPrice}} KRW</h2>
-          <p><span [style.color]="(kosdaq.CurrentPrice >= 0) ? 'red' : 'blue'">{{kosdaq.FluctuatedAmount >= 0 ? "+" : "-"}}{{kosdaq.FluctuatedAmount}}
+          <p><span [style.color]="(kosdaq.FluctuatedAmount >= 0) ? 'red' : 'blue'">
+            <i *ngIf="kosdaq.FluctuatedAmount >= 0" class="fa fa-angle-double-up"></i>
+            <i *ngIf="kosdaq.FluctuatedAmount < 0" class="fa fa-angle-double-down"></i>
+            {{kosdaq.FluctuatedAmount >= 0 ? "+" : "-"}}{{kosdaq.FluctuatedAmount}}
             {{kosdaq.FluctuatedRate}}%</span></p>
       </div>
     </a>
     <a id="kospi200"  (click)="click_KOSPI200()" class="list-group-item list-group-item-info list-group-item-action" [ngClass]="(stockNumber == 2) ? 'active' : ''">
         <div>
           <h4>KOSPI 200</h4>
-          <h2>{{kospi200.CurrentPrice}} KRW</h2>
-          <p><span [style.color]="(kospi200.CurrentPrice >= 0) ? 'red' : 'blue'">{{kospi200.FluctuatedAmount >= 0 ? "+" : "-"}}{{kospi200.FluctuatedAmount}}
+          <h2>{{kospi200.CurrentPrice}} KRW</h2>  
+          <p><span [style.color]="(kospi200.FluctuatedAmount >= 0) ? 'red' : 'blue'">
+            <i *ngIf="kospi200.FluctuatedAmount >= 0" class="fa fa-angle-double-up"></i>
+            <i *ngIf="kospi200.FluctuatedAmount < 0" class="fa fa-angle-double-down"></i>
+            {{kospi200.FluctuatedAmount >= 0 ? "+" : ""}}{{kospi200.FluctuatedAmount}}
             {{kospi200.FluctuatedRate}}%</span></p>
         </div>
       </a>
