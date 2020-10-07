@@ -1,5 +1,7 @@
 # KSMProject
 
+link : http://ksm-front-azure.azurewebsites.net/<br>
+
 Stock Display website project<br>
 #1 Implemented Front End using Angular.<br>
 #2 Django and Django Rest Framework is used for back-end environment.<br>
