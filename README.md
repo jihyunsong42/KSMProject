@@ -1,7 +1,7 @@
 # KSMProject
 
 link : http://ksmchart-front.azurewebsites.net/<br>
-(it may take about a minute to load the page because of stock information loading speed. 
+(it may take about a minute to load the page because stock information loading is delayed. 
 
 Stock Display website project<br>
 #1 Implemented Front End using Angular.<br>
