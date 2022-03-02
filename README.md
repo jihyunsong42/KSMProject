@@ -7,5 +7,5 @@ link : http://ksmchart-front.azurewebsites.net/<br>
 
 #1 I Implemented Front-End website using Angular.<br>
 #2 Django and Django Rest Framework is used for back-end environment.<br>
-#3 Bootstrap 4, Font Awesome 4, HighCharts, Pandas were used<br>
+#3 For UI, Bootstrap 4 and Font Awesome 4 were used. HighCharts, Pandas were also used to display charts.<br>
 #3 The main page shows KOSPI stock chart, and if you select other market tabs, the chart changes to it.<br>
