@@ -1,6 +1,6 @@
 # KSMProject
 
-link : http://ksm-front-azure.azurewebsites.net/<br>
+link : http://ksmchart-front.azurewebsites.net/<br>
 (it may take about a minute to load the page because of stock information loading speed. 
 
 Stock Display website project<br>
